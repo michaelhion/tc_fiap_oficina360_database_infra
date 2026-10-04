@@ -49,7 +49,7 @@ jobs:
             -backend-config="bucket=${TF_STATE_BUCKET}"
 
       - name: Terraform Format Check
-        working-directory: terraform
+        working-directory: infra
         run: terraform fmt -check -recursive
 
       - name: Terraform Validate
