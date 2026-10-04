@@ -20,6 +20,10 @@ env:
   TF_IN_AUTOMATION: true
   TF_INPUT: false
 
+defaults:
+  run:
+    working-directory: infra
+
 jobs:
   terraform:
     name: Terraform ${{ inputs.action }}
@@ -41,7 +45,6 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       - name: Terraform Init
-        working-directory: terraform
         env:
           TF_STATE_BUCKET: ${{ secrets.TF_STATE_BUCKET }}
         run: |
@@ -49,25 +52,20 @@ jobs:
             -backend-config="bucket=${TF_STATE_BUCKET}"
 
       - name: Terraform Format Check
-        working-directory: infra
         run: terraform fmt -check -recursive
 
       - name: Terraform Validate
         if: inputs.action == 'validate'
-        working-directory: terraform
         run: terraform validate
 
       - name: Terraform Plan
         if: inputs.action == 'validate'
-        working-directory: terraform
         run: terraform plan
 
       - name: Terraform Apply
         if: inputs.action == 'deploy'
-        working-directory: terraform
         run: terraform apply -auto-approve
 
       - name: Terraform Destroy
         if: inputs.action == 'destroy'
-        working-directory: terraform
         run: terraform destroy -auto-approve
