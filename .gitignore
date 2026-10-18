@@ -8,7 +8,7 @@ crash.*.log
 *.tfvars
 *.tfvars.json
 
-.env
+docker/.env
 .env.*
 
 .DS_Store
