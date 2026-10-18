@@ -46,6 +46,12 @@ variable "db_username" {
   default     = "oficina360"
 }
 
+variable "project_name" {
+  description = "Nome do projeto"
+  type        = string
+  default     = "oficina360-db"
+}
+
 variable "db_instance_class" {
   description = "RDS instance class"
   type        = string

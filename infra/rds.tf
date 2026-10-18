@@ -17,7 +17,7 @@ resource "aws_db_instance" "postgres" {
   db_subnet_group_name = aws_db_subnet_group.main.name
 
   vpc_security_group_ids = [
-    data.aws_ssm_parameter.database_access_sg.value
+    local.database_access_security_group_id
   ]
 
   publicly_accessible = false

@@ -1,8 +1,3 @@
-output "vpc_id" {
-  description = "VPC used by the database"
-  value       = data.aws_vpc.lab.id
-}
-
 output "rds_identifier" {
   description = "RDS instance identifier"
   value       = aws_db_instance.postgres.identifier
@@ -31,9 +26,4 @@ output "database_username" {
 output "rds_secret_arn" {
   description = "ARN of the RDS-managed master password secret"
   value       = aws_db_instance.postgres.master_user_secret[0].secret_arn
-}
-
-output "rds_security_group_id" {
-  description = "Security group attached to RDS"
-  value       = aws_security_group.rds.id
 }
