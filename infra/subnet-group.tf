@@ -1,10 +1,14 @@
 resource "aws_db_subnet_group" "main" {
-  name        = "${var.project_name}-${var.environment}-subnets"
+  name        = "oficina360-db-subnets"
   description = "Subnets utilizadas pelo RDS PostgreSQL"
   subnet_ids  = local.subnet_ids
 
+  lifecycle {
+    prevent_destroy = true
+  }
+
   tags = {
-    Name        = "${var.project_name}-${var.environment}-subnets"
+    Name        = "oficina360-db-subnets"
     Project     = var.project_name
     Environment = var.environment
     ManagedBy   = "terraform"
